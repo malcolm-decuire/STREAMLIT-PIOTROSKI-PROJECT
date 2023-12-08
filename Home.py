@@ -1,6 +1,9 @@
 #s1- import dependencies
 import streamlit as st
 import pandas as pd
+import plotly.express as px
+#s1 for multipage apps, include on all pages 
+session_state = st.session_state
 
 #s1 set up the page 
 st.set_page_config(page_title="Dashboard", page_icon="🌍", layout="wide")
@@ -11,15 +14,29 @@ st.markdown("##")
 with open('style.css') as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
+#s1a some suggestions? 
+def load_data(file_path, sheet_name):
+    try:
+        return pd.read_excel(file_path, sheet_name=sheet_name)
+    except Exception as e:
+        st.error(f"Error loading data: {e}")
+        return None
+
 #s2 Show the excel file 
 def main():
     st.title("EODHD XLSX File")
 
-    # read local xlsx file
-    eodhd_df = pd.read_excel("EODHD-Annual-RE Fundamentals-Final-v2-clean.xlsx", sheet_name=None)
+    # Allow user to upload their own file
+    uploaded_file = st.file_uploader("Upload Excel file", type=["xlsx"])
+
+    if uploaded_file is not None:
+        eodhd_df = pd.read_excel(uploaded_file, sheet_name=None)
+    else:
+        # Use a default file path (update as needed)
+        file_path = "EODHD-Annual-RE Fundamentals-Final-v2-clean.xlsx"
+        eodhd_df = pd.read_excel(file_path, sheet_name=None)
 
     if eodhd_df:
-        # Display sheet names as options
         sheet_names = list(eodhd_df.keys())
         selected_sheet = st.selectbox("Select a sheet", sheet_names)
 
@@ -28,9 +45,6 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-#s2a Create a session state object
-session_state = st.session_state
 
 #s2b AMT data 
 amt_bs = pd.read_excel('EODHD-Annual-RE Fundamentals-Final-v2-clean.xlsx', sheet_name='AMT-BS')
@@ -41,8 +55,8 @@ amt_cf = pd.read_excel('EODHD-Annual-RE Fundamentals-Final-v2-clean.xlsx', sheet
 merged_amt_bs_is = pd.merge(amt_bs, amt_is, on='date', how='outer')
 merged_amt_df = pd.merge(merged_amt_bs_is, amt_cf, on='date', how='outer')
 
-#s2d Display the merged DataFrame
-st.dataframe(merged_amt_df)
+#s2d Display the merged DataFrame spot check
+#st.dataframe(merged_amt_df)
 
 #s2e -calculation
 def calculate_piotroski_f_score(merged_amt_df):
@@ -87,9 +101,30 @@ def calculate_piotroski_f_score(merged_amt_df):
         return merged_amt_df
 
 #s2f Calculate Piotroski F-Score
-st.session_state_merged_amt_df_score = calculate_piotroski_f_score(merged_amt_df)
+session_state_merged_amt_df_score = calculate_piotroski_f_score(merged_amt_df)
 
 #s3 data spot check 
-st.write("Did we find the session state", st.session_state_merged_amt_df_score)
+st.write("Did we find the session state", session_state_merged_amt_df_score)
+
+#s3a graph amt 
+fig_amt = px.line(
+    session_state_merged_amt_df_score,
+    x="date",
+    y="Piotroski F-Score",
+    orientation="h",
+    title="<b> AMT Score </b>",
+    color_discrete_sequence=["#0083BB"] * len(session_state_merged_amt_df_score),
+    template="plotly_white"
+)             
+tab1, tab2 = st.tabs(["Streamlit theme (default)", "Plotly native theme"])
+with tab1: 
+     # Use the Streamlit theme.
+    # This is the default. So you can also omit the theme argument.
+    st.plotly_chart(fig_amt, theme="streamlit", use_container_width=True)
+with tab2:
+    # Use the native Plotly theme.
+    st.plotly_chart(fig_amt, theme=None, use_container_width=True)
 
 
+#s3c this woks but not pretty 
+#st.line_chart(session_state_merged_amt_df_score, x="date", y="Piotroski F-Score", use_container_width=False)
