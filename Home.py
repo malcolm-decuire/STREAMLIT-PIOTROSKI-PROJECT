@@ -2,8 +2,7 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
-#s1 for multipage apps, include on all pages 
-session_state = st.session_state
+from session_state import SessionState
 
 #s1 set up the page 
 st.set_page_config(page_title="Dashboard", page_icon="🌍", layout="wide")
@@ -58,8 +57,12 @@ merged_amt_df = pd.merge(merged_amt_bs_is, amt_cf, on='date', how='outer')
 #s2d Display the merged DataFrame spot check
 #st.dataframe(merged_amt_df)
 
-#s2e -calculation
-def calculate_piotroski_f_score(merged_amt_df):
+#s2 set up session state
+session_state = SessionState(
+    merged_amt_df_score=None
+)
+#s2e -calculation try to pass session state across pages
+def calculate_piotroski_f_score(merged_amt_df, session_state):
         # Factor 1: Net Income
         merged_amt_df['Profitability'] = merged_amt_df['netIncome_x'] > 0
 
@@ -98,22 +101,26 @@ def calculate_piotroski_f_score(merged_amt_df):
             (merged_amt_df['Delta Current Ratio'] > 0).astype(int) +
             (merged_amt_df['Delta Shares Outstanding'] > 0).astype(int)
         )
+        
+        session_state.merged_amt_df_score = merged_amt_df
         return merged_amt_df
 
-#s2f Calculate Piotroski F-Score
-session_state_merged_amt_df_score = calculate_piotroski_f_score(merged_amt_df)
+#s1 for multipage apps, include on all pages 
 
-#s3 data spot check 
-st.write("Did we find the session state", session_state_merged_amt_df_score)
+#s2f Calculate Piotroski F-Score
+calculate_piotroski_f_score(merged_amt_df, session_state)
+
+#s3 data spot check s
+st.write("Did we find the session state", session_state.merged_amt_df_score)
 
 #s3a graph amt 
 fig_amt = px.line(
-    session_state_merged_amt_df_score,
+    session_state.merged_amt_df_score,
     x="date",
     y="Piotroski F-Score",
     orientation="h",
     title="<b> AMT Score </b>",
-    color_discrete_sequence=["#0083BB"] * len(session_state_merged_amt_df_score),
+    color_discrete_sequence=["#0083BB"] * len(session_state.merged_amt_df_score),
     template="plotly_white"
 )             
 tab1, tab2 = st.tabs(["Streamlit theme (default)", "Plotly native theme"])
@@ -126,5 +133,3 @@ with tab2:
     st.plotly_chart(fig_amt, theme=None, use_container_width=True)
 
 
-#s3c this woks but not pretty 
-#st.line_chart(session_state_merged_amt_df_score, x="date", y="Piotroski F-Score", use_container_width=False)
