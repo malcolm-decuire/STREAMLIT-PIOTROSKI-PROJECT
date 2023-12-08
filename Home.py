@@ -2,8 +2,6 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
-from streamlit_option_menu import option_menu
-from numerize.numerize import numerize
 import time
 
 #s1 set up the page 
@@ -18,7 +16,7 @@ with open('style.css')as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html = True)
  
 # Load Excel file into a Pandas DataFrame
-file_path = "EODHD-Annual-RE Fundamentals-Final-v2-clean"  # Replace with the actual file name
+file_path = "EODHD-Annual-RE Fundamentals-Final-v2-clean.xlsx"  # Replace with the actual file name
 df = pd.read_excel(file_path)
 
 # Streamlit app
