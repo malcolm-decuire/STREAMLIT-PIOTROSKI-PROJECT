@@ -26,7 +26,7 @@ st.title("👋 Welcome To Malcolm Decuire's Streamlit App")
 st.title("💻 Blending Finance & CS ")
 st.subheader("❓Who is this for")
 st.divider()
-st.link_button("🧑‍💻 Hiring Managers: Reach-out via LinkedIn", 'https://www.linkedin.com/in/malcolmdecuire/')
+st.link_button("🧑‍💻 Hiring Managers: Reach-out via LinkedIn", "https://www.linkedin.com/in/malcolmdecuire/")
 st.link_button("☕️ Community Memember: Reach-out via Discord @mdecuire", "https://discord.com/" )
 #s1a addtl user guide
 st.title("SOURCES OF INSPIRATION")
