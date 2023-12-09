@@ -24,7 +24,7 @@ bar.progress(100, text=loading_page)
 st.title("👋 Welcome To Malcolm Decuire's Streamlit App")
 st.title("💻 Blending Finance & CS ")
 st.subheader("❓Who is this for")
-st.divider
+st.divider()
 note_to_others = ''' 
 🧑‍💻 Hiring Managers: Reach-out via LinkedIn
 '''
