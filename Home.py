@@ -1,5 +1,6 @@
 # Dec2023-stuff that doesn't work once deployed
-# #divider='rainbow' doesnt work on cloud 
+# 1-divider='rainbow' doesnt work on cloud 
+# 2-trying to use multi line text as var to pass 
 
 #s1- import dependencies
 import streamlit as st
@@ -25,15 +26,8 @@ st.title("👋 Welcome To Malcolm Decuire's Streamlit App")
 st.title("💻 Blending Finance & CS ")
 st.subheader("❓Who is this for")
 st.divider()
-note_to_others = ''' 
-🧑‍💻 Hiring Managers: Reach-out via LinkedIn
-'''
-st.link_button(note_to_others, 'https://www.linkedin.com/in/malcolmdecuire/')
-note_to_others_2 = '''
-☕️ Beginner/Intermediate/Advancded:  
-Reach-out via Discord about the Finance side of SaaS  
-'''
-st.link_button(note_to_others_2, "https://discord.com/" )
+st.link_button("🧑‍💻 Hiring Managers: Reach-out via LinkedIn", 'https://www.linkedin.com/in/malcolmdecuire/')
+st.link_button("☕️ Community Memember: Reach-out via Discord @mdecuire", "https://discord.com/" )
 #s1a addtl user guide
 st.title("SOURCES OF INSPIRATION")
 col1, col2, col3 = st.columns(3, gap="small")
@@ -44,7 +38,7 @@ with col1:
 
 with col2:
    st.header("Banking + PE + SaaS Experience")
-   st.image('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZLTvKY-7gDQj2Ql1kNk0w2Jx8nfKMfdWP14wtmOmD7w&s',caption='Ritvik Dashoras     EODHD API Python [Very easy to use Financial Data API] 🔴', width=350)
+   st.image('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZLTvKY-7gDQj2Ql1kNk0w2Jx8nfKMfdWP14wtmOmD7w&s',caption='Ritvik Dashoras EODHD API Python [Very easy to use Financial Data API] 🔴', width=350)
 
 with col3:
    st.header("Personal Enthusiasm")
@@ -90,7 +84,7 @@ st.subheader('2. Needed access to historical data without massive annual contrac
 st.subheader('3. Its easier to work with data in environments Im already familiar with like Google Sheets, pandas, pyspark, etc')
 st.subheader('4. :blue[Experiement with rapid-prototyping to simiulate commcercial deadlines]')
 
-#s1d addtl page set up
+#s1d addtl page set up 
 st.title("Please upload EODHD XLSX File Export From Google Sheets only")
 st.header("☑ Check Roadmap for updates")
 st.subheader("For demo-purposes, theres only 2 tickers analyzed")
