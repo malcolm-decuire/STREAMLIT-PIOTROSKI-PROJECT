@@ -110,26 +110,9 @@ def calculate_piotroski_f_score(merged_amt_df, session_state):
 #s2f Calculate Piotroski F-Score
 calculate_piotroski_f_score(merged_amt_df, session_state)
 
-#s3 data spot check s
-st.write("Did we find the session state", session_state.merged_amt_df_score)
+#s3 data spot check 
+#st.write("Did we find the session state", session_state.merged_amt_df_score)
 
-#s3a graph amt 
-fig_amt = px.line(
-    session_state.merged_amt_df_score,
-    x="date",
-    y="Piotroski F-Score",
-    orientation="h",
-    title="<b> AMT Score </b>",
-    color_discrete_sequence=["#0083BB"] * len(session_state.merged_amt_df_score),
-    template="plotly_white"
-)             
-tab1, tab2 = st.tabs(["Streamlit theme (default)", "Plotly native theme"])
-with tab1: 
-     # Use the Streamlit theme.
-    # This is the default. So you can also omit the theme argument.
-    st.plotly_chart(fig_amt, theme="streamlit", use_container_width=True)
-with tab2:
-    # Use the native Plotly theme.
-    st.plotly_chart(fig_amt, theme=None, use_container_width=True)
+
 
 
