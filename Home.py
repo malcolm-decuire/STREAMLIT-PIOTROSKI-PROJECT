@@ -7,7 +7,7 @@ from session_state import SessionState
 
 #s1 set up the page 
 st.set_page_config(page_title="PIOTROSKI REIT ANALYSIS", page_icon="📈", layout="wide")
-st.subheader("📊 Piotroski Dashboard")
+st.header("📊 Piotroski Dashboard")
 st.markdown("##")
 
 
@@ -32,7 +32,7 @@ Reach-out via Discord about the Finance side of SaaS
 st.link_button(note_to_others_2, "https://discord.com/" )
 #s1a addtl user guide
 st.title("SOURCES OF INSPIRATION")
-col1, col2, col3 = st.columns(3)
+col1, col2, col3 = st.columns(3, gap="small")
 
 with col1:
    st.header("BBA")
@@ -40,11 +40,11 @@ with col1:
 
 with col2:
    st.header("Banking + PE + SaaS Experience")
-   st.image('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZLTvKY-7gDQj2Ql1kNk0w2Jx8nfKMfdWP14wtmOmD7w&s',caption='EODHD API Python [Very easy to use Financial Data API] 🔴', width=200)
+   st.image('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZLTvKY-7gDQj2Ql1kNk0w2Jx8nfKMfdWP14wtmOmD7w&s',caption='Ritvik Dashoras     EODHD API Python [Very easy to use Financial Data API] 🔴', width=350)
 
 with col3:
    st.header("Personal Enthusiasm")
-   st.image("https://static.streamlit.io/examples/owl.jpg")
+   st.image("https://images.pixexid.com/a-group-of-people-experiencing-a-moment-of-shared-enthusiasm-and-energy-as-they-sopfjwjz.jpeg", caption='People Invest In People', width=400)
 
 #s1ba addtl user guide
 col4, col5, col6 = st.columns(3, gap="medium")
@@ -52,16 +52,19 @@ with col4:
     st.link_button('Checkout Ritviks Page', 'https://www.linkedin.com/in/ritvikdashora/?originalSubdomain=in')
 
 with col5:  
-    st.link_button("Learn More about EDOHD","https://eodhd.com/financial-apis/stock-etfs-fundamental-data-feeds/")
+    st.link_button("Learn More about EDOHD","https://www.youtube.com/watch?v=yL7fcnn5P40&ab_channel=FinancialProgrammingwithRitvik%2CCFA")
 
 with col6: 
-    st.link_button('Active investors using Piotroski', 'https://seekingalpha.com/article/4567246-top-piotroski-graham-long-term-value-portfolio-2022-returns-plus-new-january-2023-semi-annual-selections')
+    st.link_button('Active Investors using Piotroski', 'https://seekingalpha.com/article/4567246-top-piotroski-graham-long-term-value-portfolio-2022-returns-plus-new-january-2023-semi-annual-selections')
 st.subheader("tl;dr Pay $50/mo to access financial & become a more intelligent investor")
 
 #s1c addtl user guide
-st.subheader("❓ Why learn about Piotroski")
+st.title("❓ What is EODHD?")
+st.header("EODHD is a French based SaaS firm that offers Robust, powerful and easy to use APIs & Ready-to-go solutions")
+st.link_button("Python docs", "https://eodhd.com/financial-apis/python-financial-libraries-and-code-samples/")
+st.title("❓ Why learn about Piotroski")
 st.link_button("Quick LinkedIn Summary","https://www.linkedin.com/pulse/piotroski-f-score-its-importance-understanding-/")
-st.subheader("❓ Whats in it for you")
+st.header("❓ Whats in it for you")
 st.link_button("Value Investors & Algo Traders use it for their benefit, why not you?","https://www.reddit.com/r/algotrading/comments/93pbwk/using_the_piotroski_f_score_as_a_factor/")
 
 #s1a page setup-Style  Allow user to upload their own file
