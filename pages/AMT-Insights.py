@@ -128,7 +128,7 @@ st.markdown(warning_note)
     
 
 
-#3 interactive data filter
+#3c interactive data filter
 def filter_dataframe(df: pd.DataFrame) -> pd.DataFrame:
     """
     From Streamlit Docs:
@@ -213,13 +213,13 @@ st.dataframe(filter_dataframe(df))
 #s4 session-state pass down & visualization
 ###########################################
 
-#s4b  Sort the DataFrame by 'date'
+#s4a  Sort the DataFrame by 'date'
 df2 = session_state.merged_amt_df_score.sort_values(by="date")
 
-#s4c Group by 'date' and create a new column 'counter' using cumcount
+#s4b Group by 'date' and create a new column 'counter' using cumcount
 df2['counter'] = df2.groupby('date').cumcount() + 1
 
-# Convert 'counter' to numeric
+#s4cConvert 'counter' to numeric
 df2['counter'] = pd.to_numeric(df2['counter'])
 
 
@@ -245,7 +245,6 @@ with tab1:
 with tab2:
     # Use the native Plotly theme.
     st.plotly_chart(fig, theme=None, use_container_width=True)
-
 
 #s4h color gradient bar chart 
 fig_gradient = px.bar(df2, x=df2['date'], y=df2['Piotroski F-Score'],
