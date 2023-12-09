@@ -6,22 +6,25 @@ import time
 from session_state import SessionState
 
 #s1 set up the page 
-st.set_page_config(page_title="XLSX Dashboard", page_icon="📈", layout="wide")
+st.set_page_config(page_title="PIOTROSKI REIT ANALYSIS", page_icon="📈", layout="wide")
 st.subheader("📊 Piotroski Dashboard")
 st.markdown("##")
 
 
 #s1a - loading items 
 loading_page = "Please Wait 🤲🏽"
-bar = st.progress(50)
+bar = st.progress(70)
 time.sleep(3)
-bar.progress(70, text=loading_page)
+bar.progress(100, text=loading_page)
 
 #s1 - info to user
 st.title("⏰ THANK YOU for your time!")
 st.title("👋 DISCLAIMER: Opinions Expressed are my own")
 st.subheader("Purpose:", divider='rainbow')
-st.write("Minimalist Project: Applying Real Estate Finance Analysis & Python Development")
+st.markdown("""
+            Minimalist Project: 
+            Applying Real Estate Finance Analysis & Python Development
+            """)
 st.title("SOURCES OF INSPIRATION")
 st.image('https://www.emorybusiness.com/wp-content/uploads/2020/10/i-3x8Jgqs-X3.jpg',caption='BBA Finance Background & +5yrs Experience',width=400)
 st.image('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZLTvKY-7gDQj2Ql1kNk0w2Jx8nfKMfdWP14wtmOmD7w&s',caption='EODHD API Python [Very easy to use Financial Data API] 🔴', width=200)
@@ -52,6 +55,8 @@ st.subheader('1. Trade-off between free datasets that interested me or paid ones
 st.subheader('2. Needed access to historical data without massive annual contracts (bloomberg is expensive)')
 st.subheader('3. Its easier to work with data in environments Im already familiar with like Google Sheets, pandas, pyspark, etc')
 st.subheader('4. :blue[Experiement with rapid-prototyping to simiulate commcercial deadlines]')
+
+#s1d addtl page set up
 st.title("Please upload EODHD XLSX File Export From Google Sheets only")
 st.write("Check Roadmap for when other file types will be selected")
 st.link_button("Resource", "https://eodhd.com/financial-apis/google-sheets-financial-add-in-for-eod-fundamentals-data/#Google_Sheets_Financial_Add-In")
@@ -86,7 +91,8 @@ st.header('Learn About Piotroski F-Score')
 # YouTube video URL
 youtube_url = "https://www.youtube.com/watch?v=HKI8pODEzVo&ab_channel=FinancialProgrammingwithRitvik%2CCFA"
 
-#s4a Display the YouTube video in the Streamlit app
+#s4a Display the YouTube video in the Streamlit app 
+# as of Dec2023 no current way to resize 
 st.video(youtube_url)
 st.divider()
 st.title('📍 Product Roadmap')

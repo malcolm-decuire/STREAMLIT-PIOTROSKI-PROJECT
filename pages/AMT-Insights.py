@@ -122,13 +122,14 @@ calculate_piotroski_f_score(merged_amt_df, session_state)
 
 st.title("AMT Piotroski Data Filter")
 
-st.write(
+st.markdown(
     """ 
      ⚠️ AS OF DEC 2023
     -SOME FILTER COMBINATIONS WILL THROW AN ERROR 
     -EXPECTED FIX DATE: Q32024
     """
 )
+
 
 #3 interactive data filter
 def filter_dataframe(df: pd.DataFrame) -> pd.DataFrame:
