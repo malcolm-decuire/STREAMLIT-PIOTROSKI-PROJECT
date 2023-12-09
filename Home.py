@@ -1,3 +1,6 @@
+# Dec2023-stuff that doesn't work once deployed
+# #divider='rainbow' doesnt work on cloud 
+
 #s1- import dependencies
 import streamlit as st
 import pandas as pd
@@ -20,7 +23,8 @@ bar.progress(100, text=loading_page)
 #s1 - info to user remember to leave double spaces after each line '''
 st.title("👋 Welcome To Malcolm Decuire's Streamlit App")
 st.title("💻 Blending Finance & CS ")
-st.subheader("❓Who is this for", divider='rainbow')
+st.subheader("❓Who is this for")
+st.divider
 note_to_others = ''' 
 🧑‍💻 Hiring Managers: Reach-out via LinkedIn
 '''
@@ -80,7 +84,7 @@ def load_data(file_path, sheet_name):
         return None
 
 #s1c page setup- guide 
-st.subheader('Reasons for EODHD', divider='rainbow')
+st.subheader('Reasons for EODHD')
 st.subheader('1. Trade-off between free datasets that bored me vs paid-ones that didnt 😅')
 st.subheader('2. Needed access to historical data without massive annual contracts (bloomberg is expensive)')
 st.subheader('3. Its easier to work with data in environments Im already familiar with like Google Sheets, pandas, pyspark, etc')
