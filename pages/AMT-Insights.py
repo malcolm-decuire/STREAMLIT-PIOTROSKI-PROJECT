@@ -119,16 +119,13 @@ calculate_piotroski_f_score(merged_amt_df, session_state)
 #st.write("EODHD + Piotroski", session_state.merged_amt_df_score)
 
 #s3b row-selection from user attempt
-
 st.title("AMT Piotroski Data Filter")
-
-st.markdown(
-    """ 
-     ⚠️ AS OF DEC 2023
-    -SOME FILTER COMBINATIONS WILL THROW AN ERROR 
-    -EXPECTED FIX DATE: Q32024
-    """
-)
+warning_note ='''⚠️ AS OF DEC 2023
+-SOME FILTER COMBINATIONS WILL THROW AN ERROR   
+-EXPECTED FIX DATE: Q32024  
+''' 
+st.markdown(warning_note)     
+    
 
 
 #3 interactive data filter

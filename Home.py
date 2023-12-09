@@ -17,21 +17,48 @@ bar = st.progress(70)
 time.sleep(3)
 bar.progress(100, text=loading_page)
 
-#s1 - info to user
-st.title("⏰ THANK YOU for your time!")
-st.title("👋 DISCLAIMER: Opinions Expressed are my own")
-st.subheader("Purpose:", divider='rainbow')
-st.markdown("""
-            Minimalist Project: 
-            Applying Real Estate Finance Analysis & Python Development
-            """)
+#s1 - info to user remember to leave double spaces after each line '''
+st.title("👋 Welcome To Malcolm Decuire's Streamlit App")
+st.title("💻 Blending Finance & CS ")
+st.subheader("❓Who is this for?", divider='rainbow')
+note_to_others = ''' 
+🧑‍💻 Hiring Managers: Reach-out via LinkedIn
+'''
+st.link_button(note_to_others, 'https://www.linkedin.com/in/malcolmdecuire/')
+note_to_others_2 = '''
+☕️ Beginner/Intermediate/Advancded:  
+Reach-out via Discord about the Finance side of SaaS  
+'''
+st.link_button(note_to_others_2, "https://discord.com/" )
+#s1a addtl user guide
 st.title("SOURCES OF INSPIRATION")
-st.image('https://www.emorybusiness.com/wp-content/uploads/2020/10/i-3x8Jgqs-X3.jpg',caption='BBA Finance Background & +5yrs Experience',width=400)
-st.image('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZLTvKY-7gDQj2Ql1kNk0w2Jx8nfKMfdWP14wtmOmD7w&s',caption='EODHD API Python [Very easy to use Financial Data API] 🔴', width=200)
-st.link_button('Checkout Ritviks Page', 'https://www.linkedin.com/in/ritvikdashora/?originalSubdomain=in')
-st.link_button("Learn More about EDOHD","https://eodhd.com/financial-apis/stock-etfs-fundamental-data-feeds/")
-st.link_button('Active investors using Piotroski', 'https://seekingalpha.com/article/4567246-top-piotroski-graham-long-term-value-portfolio-2022-returns-plus-new-january-2023-semi-annual-selections')
+col1, col2, col3 = st.columns(3)
+
+with col1:
+   st.header("BBA")
+   st.image('https://www.emorybusiness.com/wp-content/uploads/2020/10/i-3x8Jgqs-X3.jpg',caption='BBA Finance Background & +5yrs Experience',width=400)
+
+with col2:
+   st.header("Banking + PE + SaaS Experience")
+   st.image('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZLTvKY-7gDQj2Ql1kNk0w2Jx8nfKMfdWP14wtmOmD7w&s',caption='EODHD API Python [Very easy to use Financial Data API] 🔴', width=200)
+
+with col3:
+   st.header("Personal Enthusiasm")
+   st.image("https://static.streamlit.io/examples/owl.jpg")
+
+#s1ba addtl user guide
+col4, col5, col6 = st.columns(3, gap="medium")
+with col4:
+    st.link_button('Checkout Ritviks Page', 'https://www.linkedin.com/in/ritvikdashora/?originalSubdomain=in')
+
+with col5:  
+    st.link_button("Learn More about EDOHD","https://eodhd.com/financial-apis/stock-etfs-fundamental-data-feeds/")
+
+with col6: 
+    st.link_button('Active investors using Piotroski', 'https://seekingalpha.com/article/4567246-top-piotroski-graham-long-term-value-portfolio-2022-returns-plus-new-january-2023-semi-annual-selections')
 st.subheader("tl;dr Pay $50/mo to access financial & become a more intelligent investor")
+
+#s1c addtl user guide
 st.subheader("❓ Why learn about Piotroski")
 st.link_button("Quick LinkedIn Summary","https://www.linkedin.com/pulse/piotroski-f-score-its-importance-understanding-/")
 st.subheader("❓ Whats in it for you")

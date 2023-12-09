@@ -120,16 +120,12 @@ calculate_piotroski_f_score(merged_pld_df, session_state)
 #st.write("EODHD + Piotroski", session_state.merged_pld_df_score)
 
 #s3b row-selection from user attempt
-
 st.title("PLD Piotroski Data Filter")
-
-st.write(
-    """ 
-     ⚠️ AS OF DEC 2023
-    -SOME FILTER COMBINATIONS WILL THROW AN ERROR 
-    -EXPECTED FIX DATE: Q32024
-    """
-)
+warning_note ='''⚠️ AS OF DEC 2023
+-SOME FILTER COMBINATIONS WILL THROW AN ERROR   
+-EXPECTED FIX DATE: Q32024  
+''' 
+st.markdown(warning_note)     
 
 #s3c interactive data filter
 def filter_dataframe(df: pd.DataFrame) -> pd.DataFrame:
