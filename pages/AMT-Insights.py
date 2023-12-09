@@ -1,3 +1,7 @@
+# If u r new to coding -> I hope these notes help
+# If u r interested in the project please provide positive feedback 
+# there's enough negativity in the world 
+
 ############################
 #s1 import dependencies 
 ###########################
@@ -6,24 +10,39 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as pg
 from session_state import SessionState
+from pandas.api.types import (
+    is_categorical_dtype,
+    is_datetime64_any_dtype,
+    is_numeric_dtype,
+    is_object_dtype,
+)
  
-
-#s1 set up the page 
-st.set_page_config(page_title="Dashboard", page_icon="🌍", layout="wide")
-st.subheader("🔔  Analytics Dashboard")
+#s1a page setup  
+st.set_page_config(page_title="AMT-Dashboard", page_icon="📈", layout="wide")
+st.subheader("📊 Piotroski Dashboard")
 st.markdown("##")
 
-#s1a Style
+#s1b Style
 with open('style.css') as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
-#s1a some suggestions? 
+#s1c local data load for beginners & users with minimal time
 def load_data(file_path, sheet_name):
     try:
         return pd.read_excel(file_path, sheet_name=sheet_name,  index_col=0, parse_dates=True)
     except Exception as e:
         st.error(f"Error loading data: {e}")
         return None
+
+#1c project info guide  
+st.header("Summary:")
+guide = '''
+"The Piotroski F-Score, named after its creator Joseph Piotroski
+is a financial scoring system that evaluates the financial strength of a company based on its annual financial statements
+The score ranges from 0 to 9, with a higher score indicating better financial health
+'''
+st.markdown(guide)
+
 
 ############################
 #s2 XLSX upload
@@ -38,12 +57,12 @@ merged_amt_bs_is = pd.merge(amt_bs, amt_is, on='date', how='outer')
 merged_amt_df = pd.merge(merged_amt_bs_is, amt_cf, on='date', how='outer')
 
 #s2d Display the merged DataFrame spot check
+#s2d set up session state
 #st.dataframe(merged_amt_df)
-
-#s2 set up session state
 session_state = SessionState(
     merged_amt_df_score=None
 )
+
 #s2e -calculation try to pass session state across pages
 def calculate_piotroski_f_score(merged_amt_df, session_state):
         # Factor 1: Net Income
@@ -88,21 +107,113 @@ def calculate_piotroski_f_score(merged_amt_df, session_state):
         session_state.merged_amt_df_score = merged_amt_df
         return merged_amt_df
 
-#s1 for multipage apps, include on all pages 
 
 #s2f Calculate Piotroski F-Score
 calculate_piotroski_f_score(merged_amt_df, session_state)
 
 ############################
-#s3 session-state pass down
+#s3 session-state pass down & viz prep
 ###########################
 
-#s3 data spot check 
-st.write("Did we find the session state", session_state.merged_amt_df_score)
+#s3a data spot check -> 20231208 spot check
+#st.write("EODHD + Piotroski", session_state.merged_amt_df_score)
 
-############################
-#s4 session-state pass down
-###########################
+#s3b row-selection from user attempt
+
+st.title("AMT Piotroski Data Filter")
+
+st.write(
+    """ 
+     ⚠️ AS OF DEC 2023
+    -SOME FILTER COMBINATIONS WILL THROW AN ERROR 
+    -EXPECTED FIX DATE: Q32024
+    """
+)
+
+#3 interactive data filter
+def filter_dataframe(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    From Streamlit Docs:
+    Adds a UI on top of a dataframe to let viewers filter columns
+
+    Args:
+        df (pd.DataFrame): Original dataframe
+
+    Returns:
+        pd.DataFrame: Filtered dataframe
+    """
+    modify = st.checkbox("Add filters")
+
+    if not modify:
+        return df
+
+    df = df.copy()
+
+    # Try to convert datetimes into a standard format (datetime, no timezone)
+    for col in df.columns:
+        if is_object_dtype(df[col]):
+            try:
+                df[col] = pd.to_datetime(df[col])
+            except Exception:
+                pass
+
+        if is_datetime64_any_dtype(df[col]):
+            df[col] = df[col].dt.tz_localize(None)
+
+    modification_container = st.container()
+
+    with modification_container:
+        to_filter_columns = st.multiselect("Filter dataframe on", df.columns)
+        for column in to_filter_columns:
+            left, right = st.columns((1, 20))
+            left.write("↳")
+            # Treat columns with < 10 unique values as categorical
+            if is_categorical_dtype(df[column]) or df[column].nunique() < 10:
+                user_cat_input = right.multiselect(
+                    f"Values for {column}",
+                    df[column].unique(),
+                    default=list(df[column].unique()),
+                )
+                df = df[df[column].isin(user_cat_input)]
+            elif is_numeric_dtype(df[column]):
+                _min = float(df[column].min())
+                _max = float(df[column].max())
+                step = (_max - _min) / 100
+                user_num_input = right.slider(
+                    f"Values for {column}",
+                    _min,
+                    _max,
+                    (_min, _max),
+                    step=step,
+                )
+                df = df[df[column].between(*user_num_input)]
+            elif is_datetime64_any_dtype(df[column]):
+                user_date_input = right.date_input(
+                    f"Values for {column}",
+                    value=(
+                        df[column].min(),
+                        df[column].max(),
+                    ),
+                )
+                if len(user_date_input) == 2:
+                    user_date_input = tuple(map(pd.to_datetime, user_date_input))
+                    start_date, end_date = user_date_input
+                    df = df.loc[df[column].between(start_date, end_date)]
+            else:
+                user_text_input = right.text_input(
+                    f"Substring or regex in {column}",
+                )
+                if user_text_input:
+                    df = df[df[column].str.contains(user_text_input)]
+
+    return df
+df = session_state.merged_amt_df_score
+st.dataframe(filter_dataframe(df))
+
+
+###########################################
+#s4 session-state pass down & visualization
+###########################################
 
 #s4b  Sort the DataFrame by 'date'
 df2 = session_state.merged_amt_df_score.sort_values(by="date")
