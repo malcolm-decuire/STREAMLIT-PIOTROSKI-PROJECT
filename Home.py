@@ -20,7 +20,7 @@ bar.progress(100, text=loading_page)
 #s1 - info to user remember to leave double spaces after each line '''
 st.title("👋 Welcome To Malcolm Decuire's Streamlit App")
 st.title("💻 Blending Finance & CS ")
-st.subheader("❓Who is this for?", divider='rainbow')
+st.subheader("❓Who is this for", divider='rainbow')
 note_to_others = ''' 
 🧑‍💻 Hiring Managers: Reach-out via LinkedIn
 '''
@@ -59,7 +59,7 @@ with col6:
 st.subheader("tl;dr Pay $50/mo to access financial & become a more intelligent investor")
 
 #s1c addtl user guide
-st.title("❓ What is EODHD?")
+st.title("❓ What is EODHD")
 st.header("EODHD is a French based SaaS firm that offers Robust, powerful and easy to use APIs & Ready-to-go solutions")
 st.link_button("Python docs", "https://eodhd.com/financial-apis/python-financial-libraries-and-code-samples/")
 st.title("❓ Why learn about Piotroski")
@@ -81,20 +81,35 @@ def load_data(file_path, sheet_name):
 
 #s1c page setup- guide 
 st.subheader('Reasons for EODHD', divider='rainbow')
-st.subheader('1. Trade-off between free datasets that interested me or paid ones that did')
+st.subheader('1. Trade-off between free datasets that bored me vs paid-ones that didnt 😅')
 st.subheader('2. Needed access to historical data without massive annual contracts (bloomberg is expensive)')
 st.subheader('3. Its easier to work with data in environments Im already familiar with like Google Sheets, pandas, pyspark, etc')
 st.subheader('4. :blue[Experiement with rapid-prototyping to simiulate commcercial deadlines]')
 
 #s1d addtl page set up
 st.title("Please upload EODHD XLSX File Export From Google Sheets only")
-st.write("Check Roadmap for when other file types will be selected")
+st.header("☑ Check Roadmap for updates")
+st.subheader("For demo-purposes, theres only 2 tickers analyzed")
 st.link_button("Resource", "https://eodhd.com/financial-apis/google-sheets-financial-add-in-for-eod-fundamentals-data/#Google_Sheets_Financial_Add-In")
 
+#s1e addtl guide info 
+col7, col8 = st.columns(2)
+with col7:
+    st.title("What is AMT")
+    st.subheader("AMT is a leading independent owner, operator and developer of multitenant communications real estate with a portfolio")
+    st.image("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1pPomlHQGDNA4vWGuw-icR36y57RYJkyC7kEG5NBC5g&s", caption='AMT', width=250)
+    st.link_button("AMTs SEC Filings", "https://www.americantower.com/investor-relations/sec-filings/")
+
+#s1f guide info PLD
+with col8:
+    st.title("What is PLD")
+    st.subheader("PLD acquires, develop, and maintain the largest collection of high-quality logistics real estate in the world.")
+    st.image("https://www.midamericaroofing.com/assets/1/6/MainFCKEditorDimension/3e6e40c833c0c17196fdb7a863329325.jpeg", caption='AMT',width=250)
+    st.link_button("PLDs SEC Filings", "https://ir.prologis.com/financials/sec-filings")
 
 #s2 Utilize the local excel file & link to the source of the data 
 def main():
-    uploaded_file = st.file_uploader("EODHD Fundamentals Formatted Data", type=["xlsx"])
+    uploaded_file = st.file_uploader("⚠️ WARNING-Only Upload EODHD Fundamentals Data", type=["xlsx"])
 
     if uploaded_file is not None:
         eodhd_df = pd.read_excel(uploaded_file, sheet_name=None)
@@ -117,7 +132,7 @@ if __name__ == "__main__":
 st.divider()
 
 #s4 implement a video about learning the Piotroski f-score 
-st.header('Learn About Piotroski F-Score')
+st.header('Piotroski Course by Ritviki')
 # YouTube video URL
 youtube_url = "https://www.youtube.com/watch?v=HKI8pODEzVo&ab_channel=FinancialProgrammingwithRitvik%2CCFA"
 
@@ -126,23 +141,24 @@ youtube_url = "https://www.youtube.com/watch?v=HKI8pODEzVo&ab_channel=FinancialP
 st.video(youtube_url)
 st.divider()
 st.title('📍 Product Roadmap')
-st.subheader("Upcoming Phases")
+st.header("Upcoming Phases")
+st.subheader("👉 Click right-hand arrows to enlarge")
 
-#s4 set the tabs up
+#s4b set the tabs up
 tab1, tab2, tab3 = st.tabs(["🚩 Phase I", "🚩 Phase II", "🚩 Phase III"])
 
 with tab1:
-   st.header("Add More Securities & F-Scores")
+   st.header("📅 Add More Securities & F-Scores")
    st.write("Between Jan-Jun 2024 add more tickers")
    st.image("https://static.seekingalpha.com/uploads/2022/11/6/47791712-16677919823973587_origin.png", width=400)
 
 with tab2:
-   st.header("Add More Insights")
-   st.write("Between Jun-Dec 2024 add graphs like Sankey to breakdown each statement")
+   st.header("📅 Add More Insights")
+   st.write("Between Jun-Dec 2024 add more insights & charts")
    st.image("https://mma.prnewswire.com/media/2090559/Technavio_Global_Reit_Market_2023.jpg?p=publish", width=600)
 
 with tab3:
-   st.header("Community Feedback")
+   st.header("🤝 Community Feedback")
    st.write("Release a repo that can run locally & in the cloud")
    st.write("Gather feedback from traders, financial advisors, and other ethusiats in the space")
    st.image("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4UulzMFW8KVY8yoQRUlCkzlWx-ObU7xEGnSqUH2_zyA&s", width=400)
