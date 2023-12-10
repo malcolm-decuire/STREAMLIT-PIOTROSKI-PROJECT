@@ -10,8 +10,8 @@ import time
 from session_state import SessionState
 
 #s1a set up the page 
-st.set_page_config(page_title="REIT ANALYSIS", page_icon="📈", layout="wide")
-st.header("REIT ANALYSIS APP")
+st.set_page_config(page_title="Real-Estate App", page_icon="🏡", layout="wide")
+st.header("REIT ANALYSIS")
 st.markdown("##")
 
 #s1b progress bar
@@ -26,18 +26,19 @@ my_bar.empty()
 
 
 #s1c - info to user remember to leave double spaces after each line '''
-st.title("👋 Welcome To Malcolm Decuire's REIT Analysis App")
-st.title("💻 Blending Finance & CS ")
-st.subheader("Purpose: Teach Finance & Programming")
-st.subheader("❓Who is this for")
-st.subheader("🏘️ Real Estate Enthusiats & 👨‍💻 Programmers")
-st.divider()
-st.link_button("▶️  Click here to reach-out via LinkedIn", "https://www.linkedin.com/in/malcolmdecuire/")
-st.link_button("▶️  Click here to reach-out via Discord @mdecuire", "https://discord.com/" )
+st.header("Applied 💰 Finance + 💻 CS")
+st.subheader("🎖️ Mission Statement: enable the direct-application of finance & cs")
+st.title("💡 IDEAL END-STATE-An app that enables users to learn about: ")
+st.write("📌 REIT analysis")
+st.write("📌 python apps & how to deploy them via streamlit")
+st.write("📌 basic corporate finance analysis")
+st.write("📌 github, local/cloud development best practices")
+st.subheader("❓Target Audience")
+st.subheader("🏘️ Real Estate Enthusiasts  &  👨‍💻 Developers")
 st.divider()
 
 #s1d addtl user guide
-st.title("SOURCES OF INSPIRATION")
+st.title("PROJECT MOTIVATIONS")
 col1, col2, col3 = st.columns(3, gap="small")
 
 with col1:
@@ -53,7 +54,7 @@ with col3:
    st.image("https://assets-global.website-files.com/6384aadeeb9aef4298860dd3/6466fc4234a7324e51fd3491_annie-spratt-QckxruozjRg-unsplash.jpeg", caption='People Invest In People', width=400)
 
 #s1e addtl user guide
-st.header("Additional Resources")
+st.header("Other MOTIVATIONS")
 col4, col5, col6 = st.columns(3, gap="medium")
 with col4:
     st.link_button('▶️  1/ Ritviks Financial Programming Channel', 'https://www.linkedin.com/in/ritvikdashora/?originalSubdomain=in')
@@ -63,17 +64,23 @@ with col5:
 
 with col6: 
     st.link_button('▶️  3/ Application of Piotroski', 'https://seekingalpha.com/article/4567246-top-piotroski-graham-long-term-value-portfolio-2022-returns-plus-new-january-2023-semi-annual-selections')
-st.subheader("tl;dr Pay $50/mo to access financial & become a more intelligent investor")
-
 st.divider()
 
 #s2 setup
 st.header("🤔 How do I use this app?")
-st.subheader("👉 Select a REIT from dropdown to view Fundamentals")
+st.header("📝 Visit the Insights Pages")
+st.subheader("✏️ Insights Page includes basic REIT analysis")
+st.subheader("👉 Select a REITs Financial Statement (e.g. Income)")
+st.caption("As of Dec-2023: limited functionality")
+
+st.divider()
+
+st.subheader("✓ Check Product Roadmap page for upcoming features")
+st.subheader("⚠️ WARNING-Only Upload EODHD Fundamentals Data")
 
 #s2 Utilize the local excel file & link to the source of the data 
 def main():
-    uploaded_file = st.file_uploader("⚠️  WARNING-Only Upload EODHD Fundamentals Data", type=["xlsx"])
+    uploaded_file = st.file_uploader("", type=["xlsx"])
 
     if uploaded_file is not None:
         eodhd_df = pd.read_excel(uploaded_file, sheet_name=None)
