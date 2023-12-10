@@ -43,15 +43,15 @@ col1, col2, col3 = st.columns(3, gap="small")
 
 with col1:
    st.header("Finance Background")
-   st.image('https://www.emorybusiness.com/wp-content/uploads/2020/10/i-3x8Jgqs-X3.jpg',caption='Working in Saas & Finance since 2013',width=400)
+   st.image('https://www.emorybusiness.com/wp-content/uploads/2020/10/i-3x8Jgqs-X3.jpg',caption='⭐︎ Working in Saas & Finance since 2013',width=400)
 
 with col2:
    st.header("DEV Community")
-   st.image('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZLTvKY-7gDQj2Ql1kNk0w2Jx8nfKMfdWP14wtmOmD7w&s',caption='Developing since 2018 w/ a focus on Finance & SaaS', width=250)
+   st.image('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZLTvKY-7gDQj2Ql1kNk0w2Jx8nfKMfdWP14wtmOmD7w&s',caption='⭐︎ Developing fintech apps since 2018', width=250)
 
 with col3:
    st.header("Personal Growth")
-   st.image("https://assets-global.website-files.com/6384aadeeb9aef4298860dd3/6466fc4234a7324e51fd3491_annie-spratt-QckxruozjRg-unsplash.jpeg", caption='People Invest In People', width=400)
+   st.image("https://assets-global.website-files.com/6384aadeeb9aef4298860dd3/6466fc4234a7324e51fd3491_annie-spratt-QckxruozjRg-unsplash.jpeg", caption='⭐︎ Investing in others', width=400)
 
 #s1e addtl user guide
 st.header("Other MOTIVATIONS")
@@ -72,10 +72,10 @@ st.header("📝 Visit the Insights Pages")
 st.subheader("✏️ Insights Page includes basic REIT analysis")
 st.subheader("👉 Select a REITs Financial Statement (e.g. Income)")
 st.caption("As of Dec-2023: limited functionality")
+st.subheader("✓ Check Product Roadmap page for upcoming features")
 
 st.divider()
 
-st.subheader("✓ Check Product Roadmap page for upcoming features")
 st.subheader("⚠️ WARNING-Only Upload EODHD Fundamentals Data")
 
 #s2 Utilize the local excel file & link to the source of the data 
